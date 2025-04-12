@@ -62,6 +62,12 @@
       font-style: italic;
       color: #555;
     }
+
+    .desfecho {
+      margin-top: 10px;
+      font-weight: bold;
+      color: #666;
+    }
   </style>
 </head>
 <body>
@@ -88,42 +94,48 @@
         participantes: "Sertanejos pobres, ex-escravos, pequenos agricultores",
         local: "Canudos, interior da Bahia",
         classificacao: "Rural, Messiânico",
-        resumo: "Ocorreu no sertão da Bahia, liderado por Antônio Conselheiro. Foi uma resistência popular contra a opressão da República e resultou em um dos maiores massacres da história do Brasil."
+        resumo: "Ocorreu no sertão da Bahia, liderado por Antônio Conselheiro. Foi uma resistência popular contra a opressão da República e resultou em um dos maiores massacres da história do Brasil.",
+        desfecho: "O arraial foi destruído pelo Exército em 1897 e quase todos os moradores foram mortos."
       },
       Contestado: {
         lider: "José Maria (e outros líderes religiosos posteriormente)",
         participantes: "Camponeses, ex-soldados, trabalhadores expulsos por ferrovias",
         local: "Região do Contestado (divisa SC e PR)",
         classificacao: "Rural, Messiânico",
-        resumo: "Conflito entre camponeses e as forças do governo por terras, influenciado por lideranças religiosas. Misturava religiosidade com a luta por direitos."
+        resumo: "Conflito entre camponeses e as forças do governo por terras, influenciado por lideranças religiosas. Misturava religiosidade com a luta por direitos.",
+        desfecho: "A repressão militar foi intensa e resultou em milhares de mortos entre 1912 e 1916."
       },
       Cangaço: {
         lider: "Virgulino Ferreira da Silva (Lampião)",
         participantes: "Cangaceiros (grupos armados), sertanejos pobres",
         local: "Sertão nordestino",
         classificacao: "Rural, Não Messiânico",
-        resumo: "O Cangaço foi um fenômeno de banditismo social que refletia a luta por justiça em um sertão marcado pela pobreza e violência dos coronéis."
+        resumo: "O Cangaço foi um fenômeno de banditismo social que refletia a luta por justiça em um sertão marcado pela pobreza e violência dos coronéis.",
+        desfecho: "Lampião e seu bando foram mortos em 1938 numa emboscada armada pela polícia."
       },
       Chibata: {
         lider: "João Cândido Felisberto",
         participantes: "Marinheiros negros e pobres da Marinha brasileira",
         local: "Rio de Janeiro (principal base naval)",
         classificacao: "Urbana, Não Messiânico",
-        resumo: "Marinheiros se rebelaram contra os castigos físicos e más condições de trabalho. João Cândido liderou o movimento exigindo fim da chibata."
+        resumo: "Marinheiros se rebelaram contra os castigos físicos e más condições de trabalho. João Cândido liderou o movimento exigindo fim da chibata.",
+        desfecho: "O castigo foi abolido, mas os líderes foram perseguidos. João Cândido foi preso e expulso da Marinha."
       },
       Vacina: {
         lider: "Sem um líder específico",
         participantes: "População urbana, setores pobres, trabalhadores",
         local: "Rio de Janeiro",
         classificacao: "Urbana, Não Messiânico",
-        resumo: "Revolta popular contra a vacinação obrigatória imposta de forma autoritária, em meio a reformas urbanas que afetavam os mais pobres."
+        resumo: "Revolta popular contra a vacinação obrigatória imposta de forma autoritária, em meio a reformas urbanas que afetavam os mais pobres.",
+        desfecho: "A revolta foi sufocada com violência pelo governo. A vacina voltou a ser aplicada de forma mais organizada."
       },
       Operarios: {
         lider: "Sindicalistas, anarquistas, comunistas (ex: Astrojildo Pereira)",
         participantes: "Operários urbanos, principalmente imigrantes italianos e espanhóis",
         local: "Centros urbanos industriais (Rio de Janeiro, São Paulo)",
         classificacao: "Urbana, Não Messiânico",
-        resumo: "Movimento de trabalhadores em busca de melhores condições de trabalho, direitos trabalhistas e liberdade sindical, influenciado por ideias socialistas e anarquistas."
+        resumo: "Movimento de trabalhadores em busca de melhores condições de trabalho, direitos trabalhistas e liberdade sindical, influenciado por ideias socialistas e anarquistas.",
+        desfecho: "Apesar da repressão, muitas conquistas trabalhistas foram obtidas ao longo do século XX."
       }
     };
 
@@ -144,10 +156,10 @@
         <p><span class="bold">Local:</span> ${info.local}</p>
         <p><span class="bold">Classificação:</span> ${info.classificacao}</p>
         <p class="resumo">${info.resumo}</p>
+        <p class="desfecho">Desfecho: ${info.desfecho}</p>
       `;
     }
 
-    // Mostra o primeiro movimento ao carregar
     window.onload = mostrarInfo;
   </script>
 </body>
