@@ -1,77 +1,137 @@
-import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Movimentos Sociais Brasileiros</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fdfdfd;
+      color: #333;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+    }
 
-const movimentos = {
-  Canudos: {
-    lider: "Antônio Conselheiro",
-    participantes: "Sertanejos pobres, ex-escravos, pequenos agricultores",
-    local: "Canudos, interior da Bahia",
-    classificacao: "Rural, Messiânico"
-  },
-  Contestado: {
-    lider: "José Maria (e outros líderes religiosos posteriormente)",
-    participantes: "Camponeses, ex-soldados, trabalhadores expulsos por ferrovias",
-    local: "Região do Contestado (divisa SC e PR)",
-    classificacao: "Rural, Messiânico"
-  },
-  Cangaço: {
-    lider: "Virgulino Ferreira da Silva (Lampião)",
-    participantes: "Cangaceiros (grupos armados), sertanejos pobres",
-    local: "Sertão nordestino",
-    classificacao: "Rural, Não Messiânico"
-  },
-  "Revolta da Chibata": {
-    lider: "João Cândido Felisberto",
-    participantes: "Marinheiros negros e pobres da Marinha brasileira",
-    local: "Rio de Janeiro (principal base naval)",
-    classificacao: "Urbana, Não Messiânico"
-  },
-  "Revolta da Vacina": {
-    lider: "Sem um líder específico",
-    participantes: "População urbana, setores pobres, trabalhadores",
-    local: "Rio de Janeiro",
-    classificacao: "Urbana, Não Messiânico"
-  },
-  "Movimentos Operários": {
-    lider: "Sindicalistas, anarquistas, comunistas (ex: Astrojildo Pereira)",
-    participantes: "Operários urbanos, principalmente imigrantes italianos e espanhóis",
-    local: "Centros urbanos industriais (Rio de Janeiro, São Paulo)",
-    classificacao: "Urbana, Não Messiânico"
-  }
-};
+    h1 {
+      font-size: 32px;
+      text-align: center;
+      margin-bottom: 30px;
+    }
 
-export default function MovimentosSociais() {
-  const [movimentoSelecionado, setMovimentoSelecionado] = useState("Canudos");
-  const dados = movimentos[movimentoSelecionado];
+    label {
+      font-size: 18px;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 8px;
+    }
 
-  return (
-    <div className="p-8 max-w-2xl mx-auto font-sans text-gray-800">
-      <h1 className="text-4xl font-bold mb-6 text-center">Brazilian Social Movements</h1>
+    select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
 
-      <div className="mb-6">
-        <label className="block mb-2 text-lg font-medium">Movement:</label>
-        <Select onValueChange={(value) => setMovimentoSelecionado(value)} defaultValue="Canudos">
-          <SelectTrigger className="w-full border border-gray-300 rounded px-4 py-2">
-            <SelectValue placeholder="Escolha um movimento" />
-          </SelectTrigger>
-          <SelectContent>
-            {Object.keys(movimentos).map((nome) => (
-              <SelectItem key={nome} value={nome}>{nome}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+    .card {
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
 
-      <Card className="bg-white shadow-md rounded-lg">
-        <CardContent className="p-6 space-y-3">
-          <h2 className="text-2xl font-semibold">{movimentoSelecionado}</h2>
-          <p><span className="font-semibold">Leader:</span> {dados.lider}</p>
-          <p><span className="font-semibold">Participants:</span> {dados.participantes}</p>
-          <p><span className="font-semibold">Location:</span> {dados.local}</p>
-          <p><span className="font-semibold">Classification:</span> {dados.classificacao}</p>
-        </CardContent>
-      </Card>
-    </div>
-  );
-}
+    .card h2 {
+      margin-top: 0;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .card p {
+      margin: 8px 0;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Movimentos Sociais Brasileiros</h1>
+
+  <label for="movimento">Movimento:</label>
+  <select id="movimento" onchange="mostrarInfo()">
+    <option value="Canudos">Canudos</option>
+    <option value="Contestado">Contestado</option>
+    <option value="Cangaço">Cangaço</option>
+    <option value="Chibata">Revolta da Chibata</option>
+    <option value="Vacina">Revolta da Vacina</option>
+    <option value="Operarios">Movimentos Operários</option>
+  </select>
+
+  <div class="card" id="info-card">
+    <h2>Canudos</h2>
+    <p><span class="bold">Líder:</span> Antônio Conselheiro</p>
+    <p><span class="bold">Participantes:</span> Sertanejos pobres, ex-escravos, pequenos agricultores</p>
+    <p><span class="bold">Local:</span> Canudos, interior da Bahia</p>
+    <p><span class="bold">Classificação:</span> Rural, Messiânico</p>
+  </div>
+
+  <script>
+    const dados = {
+      Canudos: {
+        lider: "Antônio Conselheiro",
+        participantes: "Sertanejos pobres, ex-escravos, pequenos agricultores",
+        local: "Canudos, interior da Bahia",
+        classificacao: "Rural, Messiânico"
+      },
+      Contestado: {
+        lider: "José Maria (e outros líderes religiosos posteriormente)",
+        participantes: "Camponeses, ex-soldados, trabalhadores expulsos por ferrovias",
+        local: "Região do Contestado (divisa SC e PR)",
+        classificacao: "Rural, Messiânico"
+      },
+      Cangaço: {
+        lider: "Virgulino Ferreira da Silva (Lampião)",
+        participantes: "Cangaceiros (grupos armados), sertanejos pobres",
+        local: "Sertão nordestino",
+        classificacao: "Rural, Não Messiânico"
+      },
+      Chibata: {
+        lider: "João Cândido Felisberto",
+        participantes: "Marinheiros negros e pobres da Marinha brasileira",
+        local: "Rio de Janeiro (principal base naval)",
+        classificacao: "Urbana, Não Messiânico"
+      },
+      Vacina: {
+        lider: "Sem um líder específico",
+        participantes: "População urbana, setores pobres, trabalhadores",
+        local: "Rio de Janeiro",
+        classificacao: "Urbana, Não Messiânico"
+      },
+      Operarios: {
+        lider: "Sindicalistas, anarquistas, comunistas (ex: Astrojildo Pereira)",
+        participantes: "Operários urbanos, principalmente imigrantes italianos e espanhóis",
+        local: "Centros urbanos industriais (Rio de Janeiro, São Paulo)",
+        classificacao: "Urbana, Não Messiânico"
+      }
+    };
+
+    function mostrarInfo() {
+      const movimento = document.getElementById("movimento").value;
+      const card = document.getElementById("info-card");
+      const info = dados[movimento];
+
+      card.innerHTML = `
+        <h2>${movimento === 'Chibata' ? 'Revolta da Chibata' : movimento === 'Vacina' ? 'Revolta da Vacina' : movimento === 'Operarios' ? 'Movimentos Operários' : movimento}</h2>
+        <p><span class="bold">Líder:</span> ${info.lider}</p>
+        <p><span class="bold">Participantes:</span> ${info.participantes}</p>
+        <p><span class="bold">Local:</span> ${info.local}</p>
+        <p><span class="bold">Classificação:</span> ${info.classificacao}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
