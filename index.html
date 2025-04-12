@@ -8,9 +8,10 @@
       font-family: Arial, sans-serif;
       background-color: #fdfdfd;
       color: #333;
-      max-width: 600px;
+      max-width: 700px;
       margin: 40px auto;
       padding: 20px;
+      padding-bottom: 60px; /* espaço para o footer */
     }
 
     h1 {
@@ -35,12 +36,13 @@
       margin-bottom: 30px;
     }
 
-    .card {
+    .card, .resumo-card {
       background-color: #fff;
       padding: 20px;
       border: 1px solid #e0e0e0;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
     }
 
     .card h2 {
@@ -49,7 +51,7 @@
       margin-bottom: 15px;
     }
 
-    .card p {
+    .card p, .resumo-card p {
       margin: 8px 0;
     }
 
@@ -57,10 +59,27 @@
       font-weight: bold;
     }
 
-    .resumo {
-      margin-top: 15px;
+    .resumo-card h3 {
+      font-size: 22px;
+      margin-top: 0;
+      color: #444;
+    }
+
+    .resumo-card p {
       font-style: italic;
       color: #555;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: transparent;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+      color: #000;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -78,8 +97,17 @@
   </select>
 
   <div class="card" id="info-card">
-    <!-- Conteúdo será inserido pelo JavaScript -->
+    <!-- Informações principais aqui -->
   </div>
+
+  <div class="resumo-card" id="resumo-card">
+    <h3>Resumo</h3>
+    <p id="resumo-texto"><!-- Resumo aqui --></p>
+  </div>
+
+  <footer>
+    <p>J.R_T</p>
+  </footer>
 
   <script>
     const dados = {
@@ -87,9 +115,9 @@
         lider: "Antônio Conselheiro",
         participantes: "Sertanejos pobres, ex-escravos, pequenos agricultores",
         local: "Canudos, interior da Bahia",
-        classificacao: "Rural, Messiânico",
-        motivacoes: "Desigualdade social, abandono do sertão, insatisfação com a República.",
         caracteristicas: "Movimento religioso-comunitário, liderado por um beato, com organização própria e forte resistência armada.",
+        motivacoes: "Desigualdade social, abandono do sertão, insatisfação com a República.",
+        classificacao: "Rural, Messiânico",
         desfecho: "O arraial foi destruído pelo Exército em 1897 e quase todos os moradores foram mortos.",
         resumo: "Ocorreu no sertão da Bahia, liderado por Antônio Conselheiro. Foi uma resistência popular contra a opressão da República e resultou em um dos maiores massacres da história do Brasil."
       },
@@ -97,9 +125,9 @@
         lider: "José Maria (e outros líderes religiosos posteriormente)",
         participantes: "Camponeses, ex-soldados, trabalhadores expulsos por ferrovias",
         local: "Região do Contestado (divisa SC e PR)",
-        classificacao: "Rural, Messiânico",
-        motivacoes: "Conflitos fundiários, expulsão de moradores por empresas estrangeiras, abandono social.",
         caracteristicas: "Movimento messiânico misturando religiosidade com luta pela terra. Teve batalhas com o Exército e forte repressão.",
+        motivacoes: "Conflitos fundiários, expulsão de moradores por empresas estrangeiras, abandono social.",
+        classificacao: "Rural, Messiânico",
         desfecho: "A repressão militar foi intensa e resultou em milhares de mortos entre 1912 e 1916.",
         resumo: "Conflito entre camponeses e as forças do governo por terras, influenciado por lideranças religiosas. Misturava religiosidade com a luta por direitos."
       },
@@ -107,9 +135,9 @@
         lider: "Virgulino Ferreira da Silva (Lampião)",
         participantes: "Cangaceiros (grupos armados), sertanejos pobres",
         local: "Sertão nordestino",
-        classificacao: "Rural, Não Messiânico",
-        motivacoes: "Violência dos coronéis, ausência do Estado, pobreza extrema.",
         caracteristicas: "Grupos armados nômades que praticavam saques e combatiam abusos de poder, vistos por uns como bandidos e por outros como justiceiros.",
+        motivacoes: "Violência dos coronéis, ausência do Estado, pobreza extrema.",
+        classificacao: "Rural, Não Messiânico",
         desfecho: "Lampião e seu bando foram mortos em 1938 numa emboscada armada pela polícia.",
         resumo: "O Cangaço foi um fenômeno de banditismo social que refletia a luta por justiça em um sertão marcado pela pobreza e violência dos coronéis."
       },
@@ -117,9 +145,9 @@
         lider: "João Cândido Felisberto",
         participantes: "Marinheiros negros e pobres da Marinha brasileira",
         local: "Rio de Janeiro (principal base naval)",
-        classificacao: "Urbana, Não Messiânico",
-        motivacoes: "Castigos físicos desumanos, más condições de vida e racismo na Marinha.",
         caracteristicas: "Revolta disciplinada, com ocupação de navios e envio de manifesto exigindo fim da chibata.",
+        motivacoes: "Castigos físicos desumanos, más condições de vida e racismo na Marinha.",
+        classificacao: "Urbana, Não Messiânico",
         desfecho: "O castigo foi abolido, mas os líderes foram perseguidos. João Cândido foi preso e expulso da Marinha.",
         resumo: "Marinheiros se rebelaram contra os castigos físicos e más condições de trabalho. João Cândido liderou o movimento exigindo fim da chibata."
       },
@@ -127,9 +155,9 @@
         lider: "Sem um líder específico",
         participantes: "População urbana, setores pobres, trabalhadores",
         local: "Rio de Janeiro",
-        classificacao: "Urbana, Não Messiânico",
-        motivacoes: "Obrigatoriedade da vacina e autoritarismo das reformas urbanas.",
         caracteristicas: "Revolta espontânea e violenta da população contra o governo e a polícia, com barricadas e conflitos nas ruas.",
+        motivacoes: "Obrigatoriedade da vacina e autoritarismo das reformas urbanas.",
+        classificacao: "Urbana, Não Messiânico",
         desfecho: "A revolta foi sufocada com violência pelo governo. A vacina voltou a ser aplicada de forma mais organizada.",
         resumo: "Revolta popular contra a vacinação obrigatória imposta de forma autoritária, em meio a reformas urbanas que afetavam os mais pobres."
       },
@@ -137,9 +165,9 @@
         lider: "Sindicalistas, anarquistas, comunistas (ex: Astrojildo Pereira)",
         participantes: "Operários urbanos, principalmente imigrantes italianos e espanhóis",
         local: "Centros urbanos industriais (Rio de Janeiro, São Paulo)",
-        classificacao: "Urbana, Não Messiânico",
-        motivacoes: "Excesso de jornada, baixos salários, falta de direitos trabalhistas.",
         caracteristicas: "Greves, criação de sindicatos, influência de ideologias como anarquismo e comunismo.",
+        motivacoes: "Excesso de jornada, baixos salários, falta de direitos trabalhistas.",
+        classificacao: "Urbana, Não Messiânico",
         desfecho: "Apesar da repressão, muitas conquistas trabalhistas foram obtidas ao longo do século XX.",
         resumo: "Movimento de trabalhadores em busca de melhores condições de trabalho, direitos trabalhistas e liberdade sindical, influenciado por ideias socialistas e anarquistas."
       }
@@ -148,6 +176,7 @@
     function mostrarInfo() {
       const movimento = document.getElementById("movimento").value;
       const card = document.getElementById("info-card");
+      const resumo = document.getElementById("resumo-texto");
       const info = dados[movimento];
 
       const nome = movimento === 'Chibata' ? 'Revolta da Chibata'
@@ -160,12 +189,13 @@
         <p><span class="bold">Líder:</span> ${info.lider}</p>
         <p><span class="bold">Participantes:</span> ${info.participantes}</p>
         <p><span class="bold">Local:</span> ${info.local}</p>
-        <p><span class="bold">Classificação:</span> ${info.classificacao}</p>
-        <p><span class="bold">Motivações:</span> ${info.motivacoes}</p>
         <p><span class="bold">Características:</span> ${info.caracteristicas}</p>
+        <p><span class="bold">Motivações:</span> ${info.motivacoes}</p>
+        <p><span class="bold">Classificação:</span> ${info.classificacao}</p>
         <p><span class="bold">Desfecho:</span> ${info.desfecho}</p>
-        <p class="resumo">${info.resumo}</p>
       `;
+
+      resumo.innerText = info.resumo;
     }
 
     window.onload = mostrarInfo;
