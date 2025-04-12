@@ -1,0 +1,73 @@
+import { useState } from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
+
+const movimentos = {
+  Canudos: {
+    lider: "Antônio Conselheiro",
+    participantes: "Sertanejos pobres, ex-escravos, pequenos agricultores",
+    local: "Canudos, interior da Bahia",
+    classificacao: "Rural, Messiânico"
+  },
+  Contestado: {
+    lider: "José Maria (e outros líderes religiosos posteriormente)",
+    participantes: "Camponeses, ex-soldados, trabalhadores expulsos por ferrovias",
+    local: "Região do Contestado (divisa SC e PR)",
+    classificacao: "Rural, Messiânico"
+  },
+  Cangaço: {
+    lider: "Virgulino Ferreira da Silva (Lampião)",
+    participantes: "Cangaceiros (grupos armados), sertanejos pobres",
+    local: "Sertão nordestino",
+    classificacao: "Rural, Não Messiânico"
+  },
+  "Revolta da Chibata": {
+    lider: "João Cândido Felisberto",
+    participantes: "Marinheiros negros e pobres da Marinha brasileira",
+    local: "Rio de Janeiro (principal base naval)",
+    classificacao: "Urbana, Não Messiânico"
+  },
+  "Revolta da Vacina": {
+    lider: "Sem um líder específico",
+    participantes: "População urbana, setores pobres, trabalhadores",
+    local: "Rio de Janeiro",
+    classificacao: "Urbana, Não Messiânico"
+  },
+  "Movimentos Operários": {
+    lider: "Sindicalistas, anarquistas, comunistas (ex: Astrojildo Pereira)",
+    participantes: "Operários urbanos, principalmente imigrantes italianos e espanhóis",
+    local: "Centros urbanos industriais (Rio de Janeiro, São Paulo)",
+    classificacao: "Urbana, Não Messiânico"
+  }
+};
+
+export default function MovimentosSociais() {
+  const [movimentoSelecionado, setMovimentoSelecionado] = useState("Canudos");
+  const dados = movimentos[movimentoSelecionado];
+
+  return (
+    <div className="p-6 max-w-xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4">Movimentos Sociais Brasileiros</h1>
+
+      <Select onValueChange={(value) => setMovimentoSelecionado(value)} defaultValue="Canudos">
+        <SelectTrigger className="w-full mb-4">
+          <SelectValue placeholder="Escolha um movimento" />
+        </SelectTrigger>
+        <SelectContent>
+          {Object.keys(movimentos).map((nome) => (
+            <SelectItem key={nome} value={nome}>{nome}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+      <Card>
+        <CardContent className="p-4 space-y-2">
+          <p><strong>Líder:</strong> {dados.lider}</p>
+          <p><strong>Participantes:</strong> {dados.participantes}</p>
+          <p><strong>Local:</strong> {dados.local}</p>
+          <p><strong>Classificação:</strong> {dados.classificacao}</p>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
