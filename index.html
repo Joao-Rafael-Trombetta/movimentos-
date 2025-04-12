@@ -56,6 +56,12 @@
     .bold {
       font-weight: bold;
     }
+
+    .resumo {
+      margin-top: 15px;
+      font-style: italic;
+      color: #555;
+    }
   </style>
 </head>
 <body>
@@ -72,11 +78,7 @@
   </select>
 
   <div class="card" id="info-card">
-    <h2>Canudos</h2>
-    <p><span class="bold">Líder:</span> Antônio Conselheiro</p>
-    <p><span class="bold">Participantes:</span> Sertanejos pobres, ex-escravos, pequenos agricultores</p>
-    <p><span class="bold">Local:</span> Canudos, interior da Bahia</p>
-    <p><span class="bold">Classificação:</span> Rural, Messiânico</p>
+    <!-- Conteúdo será inserido pelo JavaScript -->
   </div>
 
   <script>
@@ -85,37 +87,43 @@
         lider: "Antônio Conselheiro",
         participantes: "Sertanejos pobres, ex-escravos, pequenos agricultores",
         local: "Canudos, interior da Bahia",
-        classificacao: "Rural, Messiânico"
+        classificacao: "Rural, Messiânico",
+        resumo: "Ocorreu no sertão da Bahia, liderado por Antônio Conselheiro. Foi uma resistência popular contra a opressão da República e resultou em um dos maiores massacres da história do Brasil."
       },
       Contestado: {
         lider: "José Maria (e outros líderes religiosos posteriormente)",
         participantes: "Camponeses, ex-soldados, trabalhadores expulsos por ferrovias",
         local: "Região do Contestado (divisa SC e PR)",
-        classificacao: "Rural, Messiânico"
+        classificacao: "Rural, Messiânico",
+        resumo: "Conflito entre camponeses e as forças do governo por terras, influenciado por lideranças religiosas. Misturava religiosidade com a luta por direitos."
       },
       Cangaço: {
         lider: "Virgulino Ferreira da Silva (Lampião)",
         participantes: "Cangaceiros (grupos armados), sertanejos pobres",
         local: "Sertão nordestino",
-        classificacao: "Rural, Não Messiânico"
+        classificacao: "Rural, Não Messiânico",
+        resumo: "O Cangaço foi um fenômeno de banditismo social que refletia a luta por justiça em um sertão marcado pela pobreza e violência dos coronéis."
       },
       Chibata: {
         lider: "João Cândido Felisberto",
         participantes: "Marinheiros negros e pobres da Marinha brasileira",
         local: "Rio de Janeiro (principal base naval)",
-        classificacao: "Urbana, Não Messiânico"
+        classificacao: "Urbana, Não Messiânico",
+        resumo: "Marinheiros se rebelaram contra os castigos físicos e más condições de trabalho. João Cândido liderou o movimento exigindo fim da chibata."
       },
       Vacina: {
         lider: "Sem um líder específico",
         participantes: "População urbana, setores pobres, trabalhadores",
         local: "Rio de Janeiro",
-        classificacao: "Urbana, Não Messiânico"
+        classificacao: "Urbana, Não Messiânico",
+        resumo: "Revolta popular contra a vacinação obrigatória imposta de forma autoritária, em meio a reformas urbanas que afetavam os mais pobres."
       },
       Operarios: {
         lider: "Sindicalistas, anarquistas, comunistas (ex: Astrojildo Pereira)",
         participantes: "Operários urbanos, principalmente imigrantes italianos e espanhóis",
         local: "Centros urbanos industriais (Rio de Janeiro, São Paulo)",
-        classificacao: "Urbana, Não Messiânico"
+        classificacao: "Urbana, Não Messiânico",
+        resumo: "Movimento de trabalhadores em busca de melhores condições de trabalho, direitos trabalhistas e liberdade sindical, influenciado por ideias socialistas e anarquistas."
       }
     };
 
@@ -124,14 +132,23 @@
       const card = document.getElementById("info-card");
       const info = dados[movimento];
 
+      const nome = movimento === 'Chibata' ? 'Revolta da Chibata'
+                  : movimento === 'Vacina' ? 'Revolta da Vacina'
+                  : movimento === 'Operarios' ? 'Movimentos Operários'
+                  : movimento;
+
       card.innerHTML = `
-        <h2>${movimento === 'Chibata' ? 'Revolta da Chibata' : movimento === 'Vacina' ? 'Revolta da Vacina' : movimento === 'Operarios' ? 'Movimentos Operários' : movimento}</h2>
+        <h2>${nome}</h2>
         <p><span class="bold">Líder:</span> ${info.lider}</p>
         <p><span class="bold">Participantes:</span> ${info.participantes}</p>
         <p><span class="bold">Local:</span> ${info.local}</p>
         <p><span class="bold">Classificação:</span> ${info.classificacao}</p>
+        <p class="resumo">${info.resumo}</p>
       `;
     }
+
+    // Mostra o primeiro movimento ao carregar
+    window.onload = mostrarInfo;
   </script>
 </body>
 </html>
