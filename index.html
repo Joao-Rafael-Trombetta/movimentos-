@@ -46,26 +46,30 @@ export default function MovimentosSociais() {
   const dados = movimentos[movimentoSelecionado];
 
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">Movimentos Sociais Brasileiros</h1>
+    <div className="p-8 max-w-2xl mx-auto font-sans text-gray-800">
+      <h1 className="text-4xl font-bold mb-6 text-center">Brazilian Social Movements</h1>
 
-      <Select onValueChange={(value) => setMovimentoSelecionado(value)} defaultValue="Canudos">
-        <SelectTrigger className="w-full mb-4">
-          <SelectValue placeholder="Escolha um movimento" />
-        </SelectTrigger>
-        <SelectContent>
-          {Object.keys(movimentos).map((nome) => (
-            <SelectItem key={nome} value={nome}>{nome}</SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+      <div className="mb-6">
+        <label className="block mb-2 text-lg font-medium">Movement:</label>
+        <Select onValueChange={(value) => setMovimentoSelecionado(value)} defaultValue="Canudos">
+          <SelectTrigger className="w-full border border-gray-300 rounded px-4 py-2">
+            <SelectValue placeholder="Escolha um movimento" />
+          </SelectTrigger>
+          <SelectContent>
+            {Object.keys(movimentos).map((nome) => (
+              <SelectItem key={nome} value={nome}>{nome}</SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
 
-      <Card>
-        <CardContent className="p-4 space-y-2">
-          <p><strong>Líder:</strong> {dados.lider}</p>
-          <p><strong>Participantes:</strong> {dados.participantes}</p>
-          <p><strong>Local:</strong> {dados.local}</p>
-          <p><strong>Classificação:</strong> {dados.classificacao}</p>
+      <Card className="bg-white shadow-md rounded-lg">
+        <CardContent className="p-6 space-y-3">
+          <h2 className="text-2xl font-semibold">{movimentoSelecionado}</h2>
+          <p><span className="font-semibold">Leader:</span> {dados.lider}</p>
+          <p><span className="font-semibold">Participants:</span> {dados.participantes}</p>
+          <p><span className="font-semibold">Location:</span> {dados.local}</p>
+          <p><span className="font-semibold">Classification:</span> {dados.classificacao}</p>
         </CardContent>
       </Card>
     </div>
